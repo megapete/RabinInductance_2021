@@ -10,6 +10,15 @@
 		D38EB096263A1C0A00DD1F70 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38EB095263A1C0A00DD1F70 /* AppDelegate.swift */; };
 		D38EB098263A1C0A00DD1F70 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D38EB097263A1C0A00DD1F70 /* Assets.xcassets */; };
 		D38EB09B263A1C0B00DD1F70 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = D38EB099263A1C0B00DD1F70 /* MainMenu.xib */; };
+		D38EB0A4263A1C9800DD1F70 /* AppController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38EB0A3263A1C9800DD1F70 /* AppController.swift */; };
+		D38EB0A7263A1D0500DD1F70 /* PCH_BaseClass_Matrix.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38EB0A5263A1D0500DD1F70 /* PCH_BaseClass_Matrix.swift */; };
+		D38EB0A8263A1D0500DD1F70 /* PCH_BaseClass_ExcelDesignFileReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38EB0A6263A1D0500DD1F70 /* PCH_BaseClass_ExcelDesignFileReader.swift */; };
+		D38EB0AB263A1D2500DD1F70 /* GlobalDefs.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38EB0A9263A1D2400DD1F70 /* GlobalDefs.swift */; };
+		D38EB0AC263A1D2500DD1F70 /* PCH_Defs.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38EB0AA263A1D2500DD1F70 /* PCH_Defs.swift */; };
+		D38EB0AE263A1F7B00DD1F70 /* RabinCoil.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38EB0AD263A1F7B00DD1F70 /* RabinCoil.swift */; };
+		D38EB0B0263A205600DD1F70 /* RabinWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38EB0AF263A205600DD1F70 /* RabinWindow.swift */; };
+		D38EB0B2263A221F00DD1F70 /* RabinCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38EB0B1263A221F00DD1F70 /* RabinCore.swift */; };
+		D38EB0B4263A223C00DD1F70 /* RabinSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38EB0B3263A223C00DD1F70 /* RabinSection.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +28,15 @@
 		D38EB09A263A1C0B00DD1F70 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		D38EB09C263A1C0B00DD1F70 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D38EB09D263A1C0B00DD1F70 /* RabinInductance_2021.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RabinInductance_2021.entitlements; sourceTree = "<group>"; };
+		D38EB0A3263A1C9800DD1F70 /* AppController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppController.swift; sourceTree = "<group>"; };
+		D38EB0A5263A1D0500DD1F70 /* PCH_BaseClass_Matrix.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PCH_BaseClass_Matrix.swift; path = "../../Base Classes/PCH_BaseClass_Matrix.swift"; sourceTree = "<group>"; };
+		D38EB0A6263A1D0500DD1F70 /* PCH_BaseClass_ExcelDesignFileReader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PCH_BaseClass_ExcelDesignFileReader.swift; path = "../../Base Classes/PCH_BaseClass_ExcelDesignFileReader.swift"; sourceTree = "<group>"; };
+		D38EB0A9263A1D2400DD1F70 /* GlobalDefs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GlobalDefs.swift; path = ../../../../Dropbox/MyProjects/GlobalDefs.swift; sourceTree = "<group>"; };
+		D38EB0AA263A1D2500DD1F70 /* PCH_Defs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PCH_Defs.swift; path = ../../../../Dropbox/MyProjects/PCH_Defs.swift; sourceTree = "<group>"; };
+		D38EB0AD263A1F7B00DD1F70 /* RabinCoil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RabinCoil.swift; sourceTree = "<group>"; };
+		D38EB0AF263A205600DD1F70 /* RabinWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RabinWindow.swift; sourceTree = "<group>"; };
+		D38EB0B1263A221F00DD1F70 /* RabinCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RabinCore.swift; sourceTree = "<group>"; };
+		D38EB0B3263A223C00DD1F70 /* RabinSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RabinSection.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +70,15 @@
 			isa = PBXGroup;
 			children = (
 				D38EB095263A1C0A00DD1F70 /* AppDelegate.swift */,
+				D38EB0A9263A1D2400DD1F70 /* GlobalDefs.swift */,
+				D38EB0AA263A1D2500DD1F70 /* PCH_Defs.swift */,
+				D38EB0A6263A1D0500DD1F70 /* PCH_BaseClass_ExcelDesignFileReader.swift */,
+				D38EB0A5263A1D0500DD1F70 /* PCH_BaseClass_Matrix.swift */,
+				D38EB0AF263A205600DD1F70 /* RabinWindow.swift */,
+				D38EB0B1263A221F00DD1F70 /* RabinCore.swift */,
+				D38EB0AD263A1F7B00DD1F70 /* RabinCoil.swift */,
+				D38EB0B3263A223C00DD1F70 /* RabinSection.swift */,
+				D38EB0A3263A1C9800DD1F70 /* AppController.swift */,
 				D38EB097263A1C0A00DD1F70 /* Assets.xcassets */,
 				D38EB099263A1C0B00DD1F70 /* MainMenu.xib */,
 				D38EB09C263A1C0B00DD1F70 /* Info.plist */,
@@ -129,7 +156,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D38EB0B0263A205600DD1F70 /* RabinWindow.swift in Sources */,
+				D38EB0A8263A1D0500DD1F70 /* PCH_BaseClass_ExcelDesignFileReader.swift in Sources */,
+				D38EB0A7263A1D0500DD1F70 /* PCH_BaseClass_Matrix.swift in Sources */,
+				D38EB0B4263A223C00DD1F70 /* RabinSection.swift in Sources */,
+				D38EB0B2263A221F00DD1F70 /* RabinCore.swift in Sources */,
 				D38EB096263A1C0A00DD1F70 /* AppDelegate.swift in Sources */,
+				D38EB0AE263A1F7B00DD1F70 /* RabinCoil.swift in Sources */,
+				D38EB0AC263A1D2500DD1F70 /* PCH_Defs.swift in Sources */,
+				D38EB0AB263A1D2500DD1F70 /* GlobalDefs.swift in Sources */,
+				D38EB0A4263A1C9800DD1F70 /* AppController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
