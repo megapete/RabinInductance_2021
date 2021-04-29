@@ -6,7 +6,7 @@
 //
 
 
-// This class defines the window of a phase.
+// This class defines the contents of the window of a phase.
 
 import Foundation
 

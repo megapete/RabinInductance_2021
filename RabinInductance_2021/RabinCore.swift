@@ -7,21 +7,33 @@
 
 import Foundation
 
-fileprivate let defaultWindowHtMultiplier = 3.0
-
 class RabinCore:Codable {
     
     let radius:Double
+    let windowWidth:Double
     private let realWindowHt:Double
     
     var windowHeightMultiplier:Double
     
-    var windowHeight:Double {
+    var adjustedWindowHeight:Double {
         
         get {
             
             return self.realWindowHt * windowHeightMultiplier
         }
+    }
+    
+    init(radius:Double, windowWidth:Double, windowHt:Double, windowHtMultiplier:Double) {
+        
+        self.radius = radius
+        self.windowWidth = windowWidth
+        self.realWindowHt = windowHt
+        self.windowHeightMultiplier = windowHtMultiplier
+    }
+    
+    convenience init(xlFile:PCH_ExcelDesignFile, windowHtMultiplier:Double)
+    {
+        self.init(radius:xlFile.core.radius, windowWidth:xlFile.core.windowWidth, windowHt:xlFile.core.windowHeight, windowHtMultiplier:windowHtMultiplier)
     }
     
 }
