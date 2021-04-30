@@ -10,6 +10,11 @@
 
 import Foundation
 
+let PCH_Rabin2021_Num_Iterations = 200
+let PCH_Rabin2021_RelError = 1.0E-12
+let PCH_Rabin2021_AbsError = 1.0E-15
+
+
 class RabinWindow:Codable {
     
     let core:RabinCore

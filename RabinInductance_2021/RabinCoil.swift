@@ -6,6 +6,9 @@
 //
 
 import Foundation
+import Accelerate
+
+
 
 class RabinCoil:Codable {
     
@@ -204,5 +207,120 @@ class RabinCoil:Codable {
         }
         
         self.init(innerRadius:xlWinding.innerRadius, outerRadius:xlWinding.outerElectricalRadius, I:xlWinding.I, currentDirection:xlWinding.terminal.currentDirection, name:name, sections:sections)
+    }
+    
+    
+    // DelVecchio functions
+    
+    /// DelVecchio 3e, Eq. 9.58(a)
+    static func L0(x:Double) -> Double
+    {
+        return gsl_sf_bessel_I0(x) - self.M0(x: x)
+    }
+    
+    /// DelVecchio 3e, Eq. 9.58(b)
+    static func L1(x:Double) -> Double
+    {
+        return gsl_sf_bessel_I1(x) - self.M1(x: x)
+    }
+    
+    /// DelVecchio 3e, Eq. 9.59(a)
+    static func M0(x:Double) -> Double
+    {
+        let quadrature = Quadrature(integrator: .qag(pointsPerInterval: .sixtyOne, maxIntervals: 100), absoluteTolerance: PCH_Rabin2021_AbsError, relativeTolerance: PCH_Rabin2021_RelError)
+        
+        let integrationResult = quadrature.integrate(over: 0.0...(π / 2.0)) { theta in
+            
+            return exp(-x * cos(theta))
+            
+        }
+        
+        switch integrationResult {
+        
+        case .success((let result, _ /* let estAbsError */)):
+            // DLog("Absolute error: \(estAbsError); p.u: \(estAbsError / result)")
+            return result * 2.0 / π
+        
+        case .failure(let error):
+            ALog("Error calling integration routine. The error is: \(error)")
+            return 0.0
+        }
+    }
+    
+    /// The left-hand side of 9.59(b)
+    static func AltM1(x:Double) -> Double
+    {
+        let quadrature = Quadrature(integrator: .qag(pointsPerInterval: .sixtyOne, maxIntervals: 100), absoluteTolerance: PCH_Rabin2021_AbsError, relativeTolerance: PCH_Rabin2021_RelError)
+        
+        let integrationResult = quadrature.integrate(over: 0.0...(π / 2.0)) { theta in
+            
+            let sinTheta = sin(theta)
+            return exp(-x * cos(theta)) * sinTheta * sinTheta
+            
+        }
+        
+        switch integrationResult {
+        
+        case .success((let result, _ /* let estAbsError */)):
+            // DLog("Absolute error: \(estAbsError); p.u: \(estAbsError / result)")
+            return result * 2.0 * x / π
+        
+        case .failure(let error):
+            ALog("Error calling integration routine. The error is: \(error)")
+            return 0.0
+        }
+    }
+    
+    /// DelVecchio 3e, Eq. 9.59(b)
+    static func M1(x:Double) -> Double
+    {
+        let quadrature = Quadrature(integrator: .qag(pointsPerInterval: .sixtyOne, maxIntervals: 100), absoluteTolerance: PCH_Rabin2021_AbsError, relativeTolerance: PCH_Rabin2021_RelError)
+        
+        let integrationResult = quadrature.integrate(over: 0.0...(π / 2.0)) { theta in
+            
+            return exp(-x * cos(theta)) * cos(theta)
+            
+        }
+        
+        switch integrationResult {
+        
+        case .success((let result, _ /* let estAbsError */)):
+            // DLog("Absolute error: \(estAbsError); p.u: \(estAbsError / result)")
+            return (1.0 - result) * 2.0 / π
+        
+        case .failure(let error):
+            ALog("Error calling integration routine. The error is: \(error)")
+            return 0.0
+        }
+    }
+    
+    /// DelVecchio 3e, Eq. 6.60
+    static func IntegralOf_M0_t_dt(from a:Double, to b:Double) -> Double
+    {
+        ZAssert(b >= a, message: "Illegal integral range")
+        
+        if a == 0.0
+        {
+            let quadrature = Quadrature(integrator: .qag(pointsPerInterval: .sixtyOne, maxIntervals: 100), absoluteTolerance: PCH_Rabin2021_AbsError, relativeTolerance: PCH_Rabin2021_RelError)
+            
+            let integrationResult = quadrature.integrate(over: 0.0...(π / 2.0)) { theta in
+                
+                return (1 - exp(-b * cos(theta))) / cos(theta)
+                
+            }
+            
+            switch integrationResult {
+            
+            case .success((let result, _ /* let estAbsError */)):
+                // DLog("Absolute error: \(estAbsError); p.u: \(estAbsError / result)")
+                return result * 2.0 / π
+            
+            case .failure(let error):
+                ALog("Error calling integration routine. The error is: \(error)")
+                return 0.0
+            }
+        }
+        
+        return IntegralOf_M0_t_dt(from: 0, to: b) - IntegralOf_M0_t_dt(from: 0, to: a)
     }
 }

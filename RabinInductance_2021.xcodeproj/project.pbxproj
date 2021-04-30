@@ -19,6 +19,7 @@
 		D38EB0B0263A205600DD1F70 /* RabinWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38EB0AF263A205600DD1F70 /* RabinWindow.swift */; };
 		D38EB0B2263A221F00DD1F70 /* RabinCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38EB0B1263A221F00DD1F70 /* RabinCore.swift */; };
 		D38EB0B4263A223C00DD1F70 /* RabinSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38EB0B3263A223C00DD1F70 /* RabinSection.swift */; };
+		F5E40148263C74C600C92728 /* libgsl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F5E40147263C74C600C92728 /* libgsl.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +38,8 @@
 		D38EB0AF263A205600DD1F70 /* RabinWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RabinWindow.swift; sourceTree = "<group>"; };
 		D38EB0B1263A221F00DD1F70 /* RabinCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RabinCore.swift; sourceTree = "<group>"; };
 		D38EB0B3263A223C00DD1F70 /* RabinSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RabinSection.swift; sourceTree = "<group>"; };
+		F5E40147263C74C600C92728 /* libgsl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libgsl.a; path = ../GNU_Scientific_Library/lib/libgsl.a; sourceTree = "<group>"; };
+		F5E40149263C752D00C92728 /* RabinInductance_2021-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RabinInductance_2021-Bridging-Header.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,6 +47,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F5E40148263C74C600C92728 /* libgsl.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -55,6 +59,7 @@
 			children = (
 				D38EB094263A1C0900DD1F70 /* RabinInductance_2021 */,
 				D38EB093263A1C0900DD1F70 /* Products */,
+				F5E40146263C74C600C92728 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -83,8 +88,17 @@
 				D38EB099263A1C0B00DD1F70 /* MainMenu.xib */,
 				D38EB09C263A1C0B00DD1F70 /* Info.plist */,
 				D38EB09D263A1C0B00DD1F70 /* RabinInductance_2021.entitlements */,
+				F5E40149263C752D00C92728 /* RabinInductance_2021-Bridging-Header.h */,
 			);
 			path = RabinInductance_2021;
+			sourceTree = "<group>";
+		};
+		F5E40146263C74C600C92728 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F5E40147263C74C600C92728 /* libgsl.a */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -118,6 +132,7 @@
 				TargetAttributes = {
 					D38EB091263A1C0900DD1F70 = {
 						CreatedOnToolsVersion = 12.5;
+						LastSwiftMigration = 1250;
 					};
 				};
 			};
@@ -234,6 +249,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../GNU_Scientific_Library/include\"";
+				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/../GNU_Scientific_Library/lib\"";
 				MACOSX_DEPLOYMENT_TARGET = 11.3;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -289,6 +306,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../GNU_Scientific_Library/include\"";
+				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/../GNU_Scientific_Library/lib\"";
 				MACOSX_DEPLOYMENT_TARGET = 11.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -303,6 +322,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = RabinInductance_2021/RabinInductance_2021.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -315,6 +335,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.huberistech.RabinInductance-2021";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "RabinInductance_2021/RabinInductance_2021-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
@@ -324,6 +346,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = RabinInductance_2021/RabinInductance_2021.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -336,6 +359,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.huberistech.RabinInductance-2021";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "RabinInductance_2021/RabinInductance_2021-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
