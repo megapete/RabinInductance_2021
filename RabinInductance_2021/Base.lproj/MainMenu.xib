@@ -641,6 +641,25 @@
                         </items>
                     </menu>
                 </menuItem>
+                <menuItem title="Test" id="AW8-he-9Y8">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <menu key="submenu" title="Test" id="nbc-T2-wtk">
+                        <items>
+                            <menuItem title="TestM1" id="PGE-j8-JB3">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="handleTestM1:" target="z3R-dz-bsa" id="2Ag-4Z-BQD"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="TestAltM1" id="k8Q-bs-CeX">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="handleTestAltM1:" target="z3R-dz-bsa" id="EtW-GE-MfJ"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
+                </menuItem>
                 <menuItem title="Window" id="aUF-d1-5bR">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="Window" systemMenu="window" id="Td7-aD-5lo">

@@ -227,6 +227,7 @@ class RabinCoil:Codable {
     /// DelVecchio 3e, Eq. 9.59(a)
     static func M0(x:Double) -> Double
     {
+        // consider changing to .qng to help performance
         let quadrature = Quadrature(integrator: .qag(pointsPerInterval: .sixtyOne, maxIntervals: 100), absoluteTolerance: PCH_Rabin2021_AbsError, relativeTolerance: PCH_Rabin2021_RelError)
         
         let integrationResult = quadrature.integrate(over: 0.0...(π / 2.0)) { theta in
@@ -261,8 +262,8 @@ class RabinCoil:Codable {
         
         switch integrationResult {
         
-        case .success((let result, _ /* let estAbsError */)):
-            // DLog("Absolute error: \(estAbsError); p.u: \(estAbsError / result)")
+        case .success((let result, let estAbsError )):
+            print("AltM1: Absolute error: \(estAbsError)")
             return result * 2.0 * x / π
         
         case .failure(let error):
@@ -274,6 +275,7 @@ class RabinCoil:Codable {
     /// DelVecchio 3e, Eq. 9.59(b)
     static func M1(x:Double) -> Double
     {
+        // consider changing to .qng to help performance
         let quadrature = Quadrature(integrator: .qag(pointsPerInterval: .sixtyOne, maxIntervals: 100), absoluteTolerance: PCH_Rabin2021_AbsError, relativeTolerance: PCH_Rabin2021_RelError)
         
         let integrationResult = quadrature.integrate(over: 0.0...(π / 2.0)) { theta in
@@ -284,8 +286,8 @@ class RabinCoil:Codable {
         
         switch integrationResult {
         
-        case .success((let result, _ /* let estAbsError */)):
-            // DLog("Absolute error: \(estAbsError); p.u: \(estAbsError / result)")
+        case .success((let result, let estAbsError )):
+            print("M1: Absolute error: \(estAbsError)")
             return (1.0 - result) * 2.0 / π
         
         case .failure(let error):
@@ -301,6 +303,7 @@ class RabinCoil:Codable {
         
         if a == 0.0
         {
+            // consider changing to .qng to help performance
             let quadrature = Quadrature(integrator: .qag(pointsPerInterval: .sixtyOne, maxIntervals: 100), absoluteTolerance: PCH_Rabin2021_AbsError, relativeTolerance: PCH_Rabin2021_RelError)
             
             let integrationResult = quadrature.integrate(over: 0.0...(π / 2.0)) { theta in
