@@ -303,7 +303,7 @@ class RabinCoil:Codable {
         
         if a == 0.0
         {
-            // consider changing to .qng to help performance
+            // consider changing to .qng to help performance (but note that the integrand is undefined at theta = π / 2.0)
             let quadrature = Quadrature(integrator: .qag(pointsPerInterval: .sixtyOne, maxIntervals: 100), absoluteTolerance: PCH_Rabin2021_AbsError, relativeTolerance: PCH_Rabin2021_RelError)
             
             let integrationResult = quadrature.integrate(over: 0.0...(π / 2.0)) { theta in
