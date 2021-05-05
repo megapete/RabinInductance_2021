@@ -309,7 +309,6 @@ class RabinCoil:Codable {
             let integrationResult = quadrature.integrate(over: 0.0...(π / 2.0)) { theta in
                 
                 return (1 - exp(-b * cos(theta))) / cos(theta)
-                
             }
             
             switch integrationResult {

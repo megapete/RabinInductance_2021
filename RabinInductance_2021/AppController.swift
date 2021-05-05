@@ -12,6 +12,7 @@ class AppController: NSObject {
     let numTests = 10
     let L = 1.5
     let r1 = 0.2
+    let r2 = 0.25
     
     @IBAction func handleTestM1(_ sender: Any) {
         
@@ -38,15 +39,15 @@ class AppController: NSObject {
             let n = Double(i)
             let m = n * π / L
             
-            let x = m * r1
+            let x1 = m * r1
+            let x2 = m * r2
             
-            let M1 = RabinCoil.AltM1(x: x)
-            // print("M1: \(M1)")
+            let intM0 = RabinCoil.IntegralOf_M0_t_dt(from: x1, to: x2)
             
-            let _ = M1 * 1.0
+            print(intM0)
+            
         }
         
-        print("Done AltM1!")
     }
     
 }

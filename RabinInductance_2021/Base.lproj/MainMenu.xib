@@ -651,7 +651,7 @@
                                     <action selector="handleTestM1:" target="z3R-dz-bsa" id="2Ag-4Z-BQD"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="TestAltM1" id="k8Q-bs-CeX">
+                            <menuItem title="Test_IntM0" id="k8Q-bs-CeX">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="handleTestAltM1:" target="z3R-dz-bsa" id="EtW-GE-MfJ"/>
