@@ -102,4 +102,21 @@ class RabinSection:Codable {
             self.J.append((2 * jSect / (n * π)) * (sin(n * π * self.z2 / L)) - sin(n * π * self.z1 / L))
         }
     }
+    
+    // Some simple wrappers around constants that already exist in the parent RabinCoil (to avoid recalculating things). Note that these are all ZERO-based
+    
+    private func Integer_xI1x_dx(n:Int) -> Double
+    {
+        return self.parent!.G[n].Integral
+    }
+    
+    private func Integer_xK1x_dx(n:Int) -> Double
+    {
+        return self.parent!.C[n]
+    }
+    
+    private func Integer_xL1x_dx(n:Int) -> Double
+    {
+        return self.parent!.Int_tL1t[n]
+    }
 }

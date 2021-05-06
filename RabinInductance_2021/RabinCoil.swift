@@ -35,6 +35,7 @@ class RabinCoil:Codable {
             for nextSection in newValue
             {
                 nextSection.parent = self
+                nextSection.SetupJarray(L: self.core.adjustedWindowHeight)
             }
         }
     }
@@ -54,6 +55,8 @@ class RabinCoil:Codable {
     
     var F:[SplitResult] = Array(repeating: SplitResult(Dn: 0.0, Integral: 0.0), count: PCH_Rabin2021_Num_Iterations)
     var G:[SplitResult] = Array(repeating: SplitResult(Dn: 0.0, Integral: 0.0), count: PCH_Rabin2021_Num_Iterations)
+    
+    var Int_tL1t:[Double] = Array(repeating: 0.0, count: PCH_Rabin2021_Num_Iterations)
     
     // the direction of the current in the coil. This is either -1 or 1 for Rabin coils
     let currentDirection:Int
@@ -98,6 +101,8 @@ class RabinCoil:Codable {
             E[i] = RabinCoil.IntegralOf_tK1_t_dt_from0(to: x2)
             F[i] = SplitResult(Dn: D[i], Integral: -RabinCoil.IntegralOf_tI1_t_dt_from0(to: x1))
             G[i] = SplitResult(Dn: D[i], Integral: RabinCoil.IntegralOf_tI1_t_dt(from: x1, to: x2))
+            
+            Int_tL1t[i] = RabinCoil.IntegralOf_tL1_t_dt(from: x1, to: x2)
         }
     }
     
