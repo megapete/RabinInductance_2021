@@ -46,8 +46,14 @@ class RabinCoil:Codable {
     var C:[Double] = Array(repeating: 0.0, count: PCH_Rabin2021_Num_Iterations)
     var D:[Double] = Array(repeating: 0.0, count: PCH_Rabin2021_Num_Iterations)
     var E:[Double] = Array(repeating: 0.0, count: PCH_Rabin2021_Num_Iterations)
-    var F:[(Dn:Double, Integral:Double)] = Array(repeating: (0.0, 0.0), count: PCH_Rabin2021_Num_Iterations)
-    var G:[(Dn:Double, Integral:Double)] = Array(repeating: (0.0, 0.0), count: PCH_Rabin2021_Num_Iterations)
+    
+    struct SplitResult:Codable {
+        let Dn:Double
+        let Integral:Double
+    }
+    
+    var F:[SplitResult] = Array(repeating: SplitResult(Dn: 0.0, Integral: 0.0), count: PCH_Rabin2021_Num_Iterations)
+    var G:[SplitResult] = Array(repeating: SplitResult(Dn: 0.0, Integral: 0.0), count: PCH_Rabin2021_Num_Iterations)
     
     // the direction of the current in the coil. This is either -1 or 1 for Rabin coils
     let currentDirection:Int
@@ -90,8 +96,8 @@ class RabinCoil:Codable {
             C[i] = RabinCoil.IntegralOf_tK1_t_dt(from: x1, to: x2)
             D[i] = i0k0ratio * C[i]
             E[i] = RabinCoil.IntegralOf_tK1_t_dt_from0(to: x2)
-            F[i] = (D[i], -RabinCoil.IntegralOf_tI1_t_dt_from0(to: x1))
-            G[i] = (D[i], RabinCoil.IntegralOf_tI1_t_dt(from: x1, to: x2))
+            F[i] = SplitResult(Dn: D[i], Integral: -RabinCoil.IntegralOf_tI1_t_dt_from0(to: x1))
+            G[i] = SplitResult(Dn: D[i], Integral: RabinCoil.IntegralOf_tI1_t_dt(from: x1, to: x2))
         }
     }
     
