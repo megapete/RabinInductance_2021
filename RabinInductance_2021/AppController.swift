@@ -16,20 +16,9 @@ class AppController: NSObject {
     
     @IBAction func handleTestM1(_ sender: Any) {
         
-        for i in 1..<numTests {
-            
-            let n = Double(i)
-            let m = n * π / L
-            
-            let x = m * r1
-            
-            let M1 = RabinCoil.M1(x: x)
-            let AltM1 = RabinCoil.AltM1(x: x)
-            
-            let _ = M1 * 1.0
-        }
+        let core = RabinCore(radius: 0.295 / 2, windowWidth: 0.350, windowHt: 0.680, windowHtMultiplier: 2.5)
         
-        print("Done M1!")
+        let fullInnerSection = RabinSection(name: "Inner", identification: 1, I: 170, N: 190, z1: 3 * meterPerInch, z2: 0)
     }
     
     @IBAction func handleTestAltM1(_ sender: Any) {

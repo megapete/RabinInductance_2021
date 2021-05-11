@@ -84,6 +84,105 @@ class RabinSection:Codable {
         self.parent = parent
     }
     
+    // Self Inductance Calculation
+    func SelfInductance() -> Double
+    {
+        let N1 = self.N
+        let I1 = self.I
+        
+        let selfCoil = self.parent!
+        
+        let L = selfCoil.core.adjustedWindowHeight
+        
+        let r1 = selfCoil.innerRadius
+        let r2 = selfCoil.outerRadius
+        
+        let firstTerm =  π * µ0 * N1 * N1 / (6 * L) * ((r2 + r1) * (r2 + r1) + 2 * r1 * r1)
+        
+        let result = PCH_MathArray(doubleArray: [firstTerm])
+        
+        let multiplierNumerator = π * µ0 * L // * N1 * N1
+        let multiplierDenominator = I1 * I1 // * N1 * N1
+        let multiplier = multiplierNumerator / multiplierDenominator
+        
+        for n in 1...PCH_Rabin2021_Num_Iterations
+        {
+            let m = Double(n) * π / L
+            
+            let Jn1 = self.J[n]
+            
+            let Jn1Jn1 = Jn1 * Jn1
+            let m4 = m * m * m * m
+            
+            result.Insert(selfCoil.E[n-1] * self.Integral_xI1x_dx(n: n-1) * Jn1Jn1 * multiplier / m4)
+            result.Insert(selfCoil.F[n-1].Dn * self.Integral_xK1x_dx(n: n-1) * Jn1Jn1 * multiplier / m4)
+            result.Insert(selfCoil.F[n-1].Integral * self.Integral_xK1x_dx(n: n-1) * Jn1Jn1 * multiplier / m4)
+            result.Insert(self.Integral_xL1x_dx(n: n-1) * -π / 2.0 * Jn1Jn1 * multiplier / m4)
+        }
+        
+        return result.Sum()
+    }
+    
+    // Mutual Inductance Calculation
+    func MutualInductanceTo(otherSection:RabinSection) -> Double
+    {
+        let N1 = self.N
+        let N2 = otherSection.N
+        
+        let I1 = self.I
+        let I2 = otherSection.I
+        
+        let selfCoil = self.parent!
+        let otherCoil = otherSection.parent!
+        
+        let L = selfCoil.core.adjustedWindowHeight
+        
+        let r1 = selfCoil.innerRadius
+        let r2 = selfCoil.outerRadius
+        
+        // let r3 = otherCoil.innerRadius
+        // let r4 = otherCoil.outerRadius
+        
+        let sameRadialPosition = fabs(r1 - otherCoil.innerRadius) < 0.001
+        
+        let firstTerm = sameRadialPosition ? π * µ0 * N1 * N2 / (6 * L) * ((r2 + r1) * (r2 + r1) + 2 * r1 * r1) : π * µ0 * N1 * N2 / (3 * L) * (r1 * r1 + r1 * r2 + r2 * r2)
+        
+        let result = PCH_MathArray(doubleArray: [firstTerm])
+        
+        // Ignore the N1N2/N1N2 addition that DelVecchio does. I think the real reason he does it is to take care of "opposite" wound coils. For now, I am ignoring it. This may change if I can figure out whether it is required for "double-stacked" coils. All that really needs to be done is for the N1 * N2 terms in the following two let statements to be uncommented.
+        let multiplierNumerator = π * µ0 * L // * N1 * N2
+        let multiplierDenominator = I1 * I2 // * N1 * N2
+        let multiplier = multiplierNumerator / multiplierDenominator
+        
+        for n in 1...PCH_Rabin2021_Num_Iterations
+        {
+            let m = Double(n) * π / L
+            // let x1 = m * r1
+            // let x2 = m * r2
+            
+            let Jn1 = self.J[n]
+            let Jn2 = otherSection.J[n]
+            
+            let Jn1Jn2 = Jn1 * Jn2
+            let m4 = m * m * m * m
+            
+            if sameRadialPosition
+            {
+                result.Insert(selfCoil.E[n-1] * self.Integral_xI1x_dx(n: n-1) * Jn1Jn2 * multiplier / m4)
+                result.Insert(selfCoil.F[n-1].Dn * self.Integral_xK1x_dx(n: n-1) * Jn1Jn2 * multiplier / m4)
+                result.Insert(selfCoil.F[n-1].Integral * self.Integral_xK1x_dx(n: n-1) * Jn1Jn2 * multiplier / m4)
+                result.Insert(self.Integral_xL1x_dx(n: n-1) * -π / 2.0 * Jn1Jn2 * multiplier / m4)
+            }
+            else
+            {
+                result.Insert(otherCoil.C[n-1] * self.Integral_xI1x_dx(n: n-1) * Jn1Jn2 * multiplier / m4)
+                result.Insert(otherCoil.D[n-1] * self.Integral_xK1x_dx(n: n-1) * Jn1Jn2 * multiplier / m4)
+            }
+        }
+        
+        return result.Sum()
+    }
+    
     func SetupJarray(L:Double)
     {
         guard self.parent != nil else {
@@ -94,6 +193,7 @@ class RabinSection:Codable {
         
         let jSect = self.Jsection
         
+        // J0
         self.J = [jSect * (self.z2 - self.z1) / L]
         
         for i in 1...PCH_Rabin2021_Num_Iterations
@@ -105,17 +205,17 @@ class RabinSection:Codable {
     
     // Some simple wrappers around constants that already exist in the parent RabinCoil (to avoid recalculating things). Note that these are all ZERO-based
     
-    private func Integer_xI1x_dx(n:Int) -> Double
+    private func Integral_xI1x_dx(n:Int) -> Double
     {
         return self.parent!.G[n].Integral
     }
     
-    private func Integer_xK1x_dx(n:Int) -> Double
+    private func Integral_xK1x_dx(n:Int) -> Double
     {
         return self.parent!.C[n]
     }
     
-    private func Integer_xL1x_dx(n:Int) -> Double
+    private func Integral_xL1x_dx(n:Int) -> Double
     {
         return self.parent!.Int_tL1t[n]
     }

@@ -248,7 +248,6 @@ class RabinCoil:Codable {
         self.init(innerRadius:xlWinding.innerRadius, outerRadius:xlWinding.outerElectricalRadius, I:xlWinding.I, currentDirection:xlWinding.terminal.currentDirection, name:name, core: core, sections:sections)
     }
     
-    
     // DelVecchio functions
     
     /// DelVecchio 3e, Eq. 9.58(a)
